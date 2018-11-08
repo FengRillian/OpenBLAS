@@ -219,7 +219,7 @@
       PARAMETER          ( ONE = 1.0E+0, ZERO = 0.0E+0 )
 *     ..
 *     .. Local Scalars ..
-      INTEGER            I, INFO, J
+      INTEGER            I, INFO, J, L, P
       REAL               CTEMP, STEMP, TEMP
 *     ..
 *     .. External Functions ..
@@ -271,11 +271,55 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 10 I = 1, N
+                     L = N/8
+                     P=0
+                     DO 10 I = 1, L
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+   10                CONTINUE
+                     L = MOD(N,8)
+                     DO 11 I = N-L+1, N
                         TEMP = A( J+1, I )
                         A( J+1, I ) = CTEMP*TEMP - STEMP*A( J, I )
                         A( J, I ) = STEMP*TEMP + CTEMP*A( J, I )
-   10                CONTINUE
+   11                CONTINUE 
                   END IF
    20          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -283,11 +327,55 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 30 I = 1, N
-                        TEMP = A( J+1, I )
+                     L = N/8
+                     P=0
+                     DO 30 I = 1, L
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+
+                        P=P+1
+                        TEMP = A( J+1, P )
+                        A( J+1, P ) = CTEMP*TEMP - STEMP*A( J, P )
+                        A( J, P ) = STEMP*TEMP + CTEMP*A( J, P )
+   30                CONTINUE
+                     L = MOD(N,8)
+                     DO 31 I = N-L+1, N
+                         TEMP = A( J+1, I )
                         A( J+1, I ) = CTEMP*TEMP - STEMP*A( J, I )
                         A( J, I ) = STEMP*TEMP + CTEMP*A( J, I )
-   30                CONTINUE
+   31                CONTINUE 
                   END IF
    40          CONTINUE
             END IF
@@ -297,11 +385,48 @@
                   CTEMP = C( J-1 )
                   STEMP = S( J-1 )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 50 I = 1, N
+                     L = N/8
+                     P=0
+                     DO 50 I = 1, L
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+   50                CONTINUE
+                     L = MOD(N,8)
+                     DO 51 I = N-L+1, N
                         TEMP = A( J, I )
                         A( J, I ) = CTEMP*TEMP - STEMP*A( 1, I )
-                        A( 1, I ) = STEMP*TEMP + CTEMP*A( 1, I )
-   50                CONTINUE
+                        A( 1, I ) = STEMP*TEMP + CTEMP*A( 1, I ) 
+   51                CONTINUE
                   END IF
    60          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -309,11 +434,48 @@
                   CTEMP = C( J-1 )
                   STEMP = S( J-1 )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 70 I = 1, N
+                     L = N/8
+                     P=0
+                     DO 70 I = 1, L
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = CTEMP*TEMP - STEMP*A( 1, P )
+                        A( 1, P ) = STEMP*TEMP + CTEMP*A( 1, P )
+   70                CONTINUE
+                     L = MOD(N,8)
+                     DO 71 I = N-L+1, N
                         TEMP = A( J, I )
                         A( J, I ) = CTEMP*TEMP - STEMP*A( 1, I )
-                        A( 1, I ) = STEMP*TEMP + CTEMP*A( 1, I )
-   70                CONTINUE
+                        A( 1, I ) = STEMP*TEMP + CTEMP*A( 1, I ) 
+   71                CONTINUE
                   END IF
    80          CONTINUE
             END IF
@@ -323,11 +485,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 90 I = 1, N
+                     L = N/8
+                     P=0
+                     DO 90 I = 1, L
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+   90                CONTINUE
+                     L = MOD(N,8)
+                     DO 91 I = N-L+1, N
                         TEMP = A( J, I )
                         A( J, I ) = STEMP*A( M, I ) + CTEMP*TEMP
                         A( M, I ) = CTEMP*A( M, I ) - STEMP*TEMP
-   90                CONTINUE
+   91                CONTINUE 
                   END IF
   100          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -335,11 +534,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 110 I = 1, N
+                     L = N/8
+                     P=0
+                     DO 110 I = 1, L
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( J, P )
+                        A( J, P ) = STEMP*A( M, P ) + CTEMP*TEMP
+                        A( M, P ) = CTEMP*A( M, P ) - STEMP*TEMP
+  110                CONTINUE
+                     L = MOD(N,8)
+                     DO 111 I = N-L+1, N
                         TEMP = A( J, I )
                         A( J, I ) = STEMP*A( M, I ) + CTEMP*TEMP
                         A( M, I ) = CTEMP*A( M, I ) - STEMP*TEMP
-  110                CONTINUE
+  111                CONTINUE 
                   END IF
   120          CONTINUE
             END IF
@@ -354,11 +590,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 130 I = 1, M
+                     L = M/8
+                     P=0
+                     DO 130 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+  130                CONTINUE
+                     L = MOD(M,8)
+                     DO 131 I = M-L+1, M
                         TEMP = A( I, J+1 )
                         A( I, J+1 ) = CTEMP*TEMP - STEMP*A( I, J )
-                        A( I, J ) = STEMP*TEMP + CTEMP*A( I, J )
-  130                CONTINUE
+                        A( I, J ) = STEMP*TEMP + CTEMP*A( I, J ) 
+  131                CONTINUE
                   END IF
   140          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -366,11 +639,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 150 I = 1, M
+                     L = M/8
+                     P=0
+                     DO 150 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+                        P=P+1
+                        TEMP = A( P, J+1 )
+                        A( P, J+1 ) = CTEMP*TEMP - STEMP*A( P, J )
+                        A( P, J ) = STEMP*TEMP + CTEMP*A( P, J )
+  150                CONTINUE
+                     L = MOD(M,8)
+                     DO 151 I = M-L+1, M
                         TEMP = A( I, J+1 )
                         A( I, J+1 ) = CTEMP*TEMP - STEMP*A( I, J )
-                        A( I, J ) = STEMP*TEMP + CTEMP*A( I, J )
-  150                CONTINUE
+                        A( I, J ) = STEMP*TEMP + CTEMP*A( I, J ) 
+  151                CONTINUE
                   END IF
   160          CONTINUE
             END IF
@@ -380,11 +690,48 @@
                   CTEMP = C( J-1 )
                   STEMP = S( J-1 )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 170 I = 1, M
+                     L = M/8
+                     P=0
+                     DO 170 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+  170                CONTINUE
+                     L = MOD(M,8)
+                     DO 171 I = M-L+1, M
                         TEMP = A( I, J )
                         A( I, J ) = CTEMP*TEMP - STEMP*A( I, 1 )
-                        A( I, 1 ) = STEMP*TEMP + CTEMP*A( I, 1 )
-  170                CONTINUE
+                        A( I, 1 ) = STEMP*TEMP + CTEMP*A( I, 1 ) 
+  171                CONTINUE  
                   END IF
   180          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -392,11 +739,48 @@
                   CTEMP = C( J-1 )
                   STEMP = S( J-1 )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 190 I = 1, M
+                     L = M/8
+                     P=0
+                     DO 190 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = CTEMP*TEMP - STEMP*A( P, 1 )
+                        A( P, 1 ) = STEMP*TEMP + CTEMP*A( P, 1 )
+  190                CONTINUE
+                     L = MOD(M,8)
+                     DO 191 I = M-L+1, M
                         TEMP = A( I, J )
                         A( I, J ) = CTEMP*TEMP - STEMP*A( I, 1 )
-                        A( I, 1 ) = STEMP*TEMP + CTEMP*A( I, 1 )
-  190                CONTINUE
+                        A( I, 1 ) = STEMP*TEMP + CTEMP*A( I, 1 ) 
+  191                CONTINUE  
                   END IF
   200          CONTINUE
             END IF
@@ -406,11 +790,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 210 I = 1, M
+                    L = M/8
+                    P=0
+                    DO 210 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+  210                CONTINUE
+                     L = MOD(M,8)
+                     DO 211 I = M-L+1, M
                         TEMP = A( I, J )
                         A( I, J ) = STEMP*A( I, N ) + CTEMP*TEMP
                         A( I, N ) = CTEMP*A( I, N ) - STEMP*TEMP
-  210                CONTINUE
+  211                CONTINUE
                   END IF
   220          CONTINUE
             ELSE IF( LSAME( DIRECT, 'B' ) ) THEN
@@ -418,11 +839,48 @@
                   CTEMP = C( J )
                   STEMP = S( J )
                   IF( ( CTEMP.NE.ONE ) .OR. ( STEMP.NE.ZERO ) ) THEN
-                     DO 230 I = 1, M
+                    L = M/8
+                    P=0
+                    DO 230 I = 1, L
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+                        P=P+1
+                        TEMP = A( P, J )
+                        A( P, J ) = STEMP*A( P, N ) + CTEMP*TEMP
+                        A( P, N ) = CTEMP*A( P, N ) - STEMP*TEMP
+  230                CONTINUE
+                     L = MOD(M,8)
+                     DO 231 I = M-L+1, M
                         TEMP = A( I, J )
                         A( I, J ) = STEMP*A( I, N ) + CTEMP*TEMP
                         A( I, N ) = CTEMP*A( I, N ) - STEMP*TEMP
-  230                CONTINUE
+  231                CONTINUE
                   END IF
   240          CONTINUE
             END IF
