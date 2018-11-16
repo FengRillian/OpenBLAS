@@ -1,6 +1,9 @@
 SAXPYKERNEL=axpy_loongson3a.S
 DAXPYKERNEL=daxpy_loongson3a_simd.S
 
+SROTKERNEL = rot_loongson3a.S
+DROTKERNEL = rot_loongson3a.S
+
 SGEMVNKERNEL = gemv_n.S
 SGEMVTKERNEL = gemv_t.S
 DGEMVNKERNEL = gemv_n_loongson3a.c

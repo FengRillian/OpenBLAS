@@ -1,7 +1,5 @@
 CAXPYKERNEL = ../mips/zaxpy.c
 ZAXPYKERNEL = ../mips/zaxpy.c
-SROTKERNEL = ../mips/rot.c
-DROTKERNEL = ../mips/rot.c
 CROTKERNEL = ../mips/zrot.c
 ZROTKERNEL = ../mips/zrot.c
 CSWAPKERNEL = ../mips/zswap.c
@@ -11,6 +9,13 @@ DDOTKERNEL   = ../mips/dot.c
 CDOTKERNEL   = ../mips/zdot.c                                                                                       
 ZDOTKERNEL   = ../mips/zdot.c    
 
+ifndef SROTKERNEL
+SROTKERNEL = ../mips/rot.c
+endif
+
+ifndef DROTKERNEL
+DROTKERNEL = ../mips/rot.c
+endif
 
 ifndef SNRM2KERNEL
 SNRM2KERNEL = snrm2.S
